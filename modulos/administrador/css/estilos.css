@@ -1,0 +1,486 @@
+body{
+	  margin: 0px;
+    padding: 0px; 
+    background-color: #D6D6D6;   			
+}
+/* ----------------- ESTILOS AUTENTICACIÓN -----------------*/
+#imgAutentic{
+    background-color: white;
+    position: absolute;
+    /*nos posicionamos en el centro del navegador*/
+    top:50%;
+    left:48%;
+    /*determinamos una anchura*/
+    width:280px;
+    /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+    margin-left:-160px;
+    /*determinamos una altura*/
+    height:290px;
+    /*indicamos que el margen superior, es la mitad de la altura*/
+    margin-top:-169px;    
+    box-shadow: 2px 2px 5px #999;
+    padding: 25px;
+}
+.btn_comando{
+    border: 1px solid #154360;
+    background-color: #2671B3;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none; 
+    min-width: 100px;
+    display: inline-block;
+    float: left;    
+}
+.btn_comando img{
+     width: 15px;
+     float: left;
+     margin-left: 1em;
+     margin-top: 2px;
+}
+.btn_comando label{
+    float: left;
+    font-size: 1.1em;
+    margin-left: 0.5em;
+}  
+.btn_comando label:hover{
+    cursor: pointer;
+}  
+.btn_comando:hover{
+   background-color: #1F618D;
+   cursor: pointer;
+}  
+#logoSs{
+   display: inline-block;
+   text-align: center;
+   width: 170px;
+}
+#textIngresar{
+  display: inline-block;
+  font-size: 1em;
+  width: 240px;
+  color: #566573;
+}
+#nombreUser,#contraUser{
+   padding: 7px;
+   color: #2C3E50;
+   border: 1px solid #D0D3D4;
+   font-size: 1.1em;
+   width: 230px;
+   margin-bottom: 1em;
+   float: left;
+}
+.imgAuth{
+  display: inline-block;
+  padding: 7.5px;
+  background-color: #D6D6D6;
+  border: 1px solid #D0D3D4;
+  float: left;
+}
+.imgAuth img{
+    width: 16px !important;
+    display: inline-block;
+    opacity: 0.6;
+}
+#btnCancelar{
+  float: right;
+}
+#msgSist{
+  margin-top: -5px;
+}
+
+.imgAuth:hover{
+    cursor: pointer;
+}
+
+/*------------------ ESTILOS ENCABEZADO ----------------------*/
+#headDoc{
+    display: inline-block;
+    position: fixed;
+    left: 0px;
+    top: 0px;	
+    padding: 10px;
+    width: 100%;
+    height: 68px;
+    background-color: white;        			
+    z-index: 1000;
+    box-shadow: 2px 2px 5px #ECF0F1;
+}
+#logoSiser{
+    width: 100px;
+    opacity: 0.8;
+}
+#logoSiser:hover{
+    opacity: 1;
+}  
+
+#handel,.selFecha,#selMes,#id_empresa_base{
+   margin-top: 1.7em;
+   font-size: 1.4em;
+   text-align: center;
+   padding: 5px;
+   width: 220px;
+}
+#logout{
+    width: 20px;
+}
+.mnuHeader{
+    font-size: 0.85em;
+}
+.mnuHeader:hover{
+    background-color: #FAE5D3 !important;
+}
+#mnuFlash{
+   width: 99%;
+   height: 99%
+   border: 1px solid blue;
+   display: inline-block;
+   max-width: 500px;
+}
+#idContenedor{
+   display: inline-block;
+   width: 100%;
+   height: 100%;
+   background-color: white;
+   margin-top: 7px;
+   padding: 10px;
+   padding-left: 15px;
+   text-align: center;
+}
+#preloader_01{
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   opacity: 0.6;
+   z-index: 100;
+   display: none;
+}
+#preloader_02{
+   position: fixed;
+   left: 50%;
+   top: 50%;
+   width: 70px;
+   height: 70px;
+   margin-left: -35px;
+   margin-top: -35px;
+   z-index: 1001;
+   display: none;
+}
+
+/*------- Cortes de Caja ----------*/
+
+#mnuCortesCaja table tr td{
+   font-size: 0.85em;
+   border-bottom: 1px solid #D5D8DC;
+   text-align: center;
+}
+
+#mnuCortesCaja tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+#mnuCortesCaja tr:hover{
+    background-color: #FAE5D3 !important;
+    cursor: pointer;
+}
+
+#mnuCortesCaja tr th{
+    text-align: center;
+    color: #CD6155;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+/*----------- CUENTAS COBRADAS -----------*/
+.selFecha{
+    margin-top: 5px;
+}
+.opCtasCob,.opAgenda{
+    width: 48%;
+    border: 1px solid #D0D3D4;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #999;
+    padding: 10px;
+    float: left;
+    margin: 5px;
+    background-color: #F6DDCC;
+}
+.opCtasCob table tr td{
+    font-size: 0.8em;
+    color: #566573;
+    text-align: left;
+}
+.opCtasCob table tr td label{
+    color: #566573;
+}
+.totalCc{
+    font-size: 1em !important;
+    font-weight: bold;
+    color: #BA4A00 !important;
+    text-align: center;
+}
+.opCtasCob{
+    display: inline-block;
+    text-align: center;
+}
+.tabDetalles tr td{
+    font-size: 0.7em !important;
+    color: #1F618D !important;
+}
+
+/*-------------- Agenda ------------------*/
+
+.idAgenda{
+    background-color: black;
+    color: white;
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+.NombCte{
+    display: block;
+    font-size: 1.1em;
+    text-shadow: 1px 1px white;
+}
+.opAgenda{
+    text-align: center;
+}
+.TelCte{
+    font-size: 0.9em;
+    display: block;
+    color: #566573;
+}
+.tabDetAgenda tr td{
+    font-size: 0.7em !important;
+    color: #1A5276;
+}
+.horaCita{
+    color: red;
+    font-size: 1.1em;
+    float: left;
+}
+.comentarioAgenda{
+    font-size: 0.9em;
+    background-color: white;
+    color: #2C3E50;
+    opacity: 0.8;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+}
+.nombPersonal{
+   display: inline-block;
+   color: #922B21;
+   font-size: 0.8em;
+}
+.separadorHorario{    
+    width: 100%;
+    display: inline-block;
+    height: 34px;
+    clear: both;
+    margin-top: 2em;
+    border-bottom: 1px solid #D0D3D4;
+    font-size: 1.35em;
+    font-weight: bold;
+    text-align: center;
+    color: #922B21;
+}
+.selectMenu{
+    background-color: #FDEBD0;
+}
+.totalCc img{
+    width: 20px;
+    max-height: 20px;
+}
+#selMes{
+    margin-top: 6px; 
+    width: 340px !important;
+    background-color: #0B3861;
+    color: white !important;
+}
+.tabDetallesGraph{
+    width: 97%;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.tabDetallesGraph tr td{
+    padding: 3px;
+    text-align: right;
+    font-size: 0.85em;
+    border-top: 1px solid #D0D3D4;
+}
+
+.tabDetallesGraph tr th{
+    padding: 2px;
+    text-align: right;
+    font-size: 1em;
+    background-color: #1A5276;
+    color: white;
+}
+.lblTabl{
+   color: #2C3E50 !important;
+   font-weight: bold;
+}
+#tabTotales tr td{
+   text-align: right;
+   color: #1F618D; 
+}
+#contGraficosAll{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+.elmGraph{
+   max-width: 600px;
+   background-color: #F0F3F4;
+   border-radius: 10px;
+   padding: 5px;
+   margin: 18px;
+   border:2px solid #D4E6F1;
+   padding-left: 2px;
+   padding-right: 2px;
+   margin-left: 0px;
+   margin-right: 0px;   
+}
+#addCitaNew{
+   left: 75%;
+   top: 84%;
+   z-index: 1000;
+   position: fixed;
+   width: 60px;
+   height: 60px;
+   opacity: 0.8;
+}
+#addCitaNew:hover{
+  cursor: pointer;
+  opacity: 1;
+}  
+#addCitaNew img{
+   width: 100%;
+   height: 100%;
+}
+#agendaNewCita{   
+   width: 100%;
+   height: 65em;  
+   border:none;  
+   overflow:none; 
+}
+#altoPagina{
+   left: 0px;
+   top: 0px;
+   width: 5px;
+   background-color: red;
+   height: 100%;
+   position: fixed;
+   display: none;
+}
+#btnRefresh{
+   margin-top: 1em;
+}
+h3{
+   margin-top: 2em;
+   color: #8A0808;
+}
+#tablaFranjaHoraria{
+    width: 90%;
+    margin: 5%;
+    border: none;
+}
+#tablaFranjaHoraria tr td{
+    padding: 3px;
+    width: 6px;
+    height: 6px;
+    border: none;
+    border-left: 1px solid #E6E6E6;
+    border-top: 1px solid #E6E6E6;
+}
+.lalTt{
+    font-weight: bold;
+    text-align: center;
+}
+.title_grafico{
+    font-size: 0.9em;
+    color: #585858;
+    margin-top: 10px;
+}
+.opSelectt{
+    font-size: 1.2em;
+    padding: 5px;
+    margin: 5px;
+    min-width: 100px;
+}
+
+/*---- Licencias ------------*/
+
+#msgLicencia{
+   display: block;
+   padding: 10px;
+   border: 2px solid #F78181;
+   background-color: #F79F81;
+   color: black; 
+   border-radius: 10px;
+   margin: 5px;
+   font-size: 1.2em;
+   text-align: center;
+   text-shadow: 1px 1px #F6D8CE;
+   line-height: 18px;
+}
+.MesBottom{
+   background-color: #FAFAFA;
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   height: 55px;
+   color: white; 
+   left: 0px;
+   border-top: 2px solid #585858;
+   z-index: 1000000;
+}
+
+ #mnuCortesCaja table {
+     width: 70%;
+     margin-left: 15%;
+  }
+  
+/*--------------------------------------------------------------------------------------------------------------------------*/
+/*                                                 RESOLUCION DEL CELULAR                                                   */
+/*--------------------------------------------------------------------------------------------------------------------------*/
+@media(max-width:770px)
+{
+    #handel,#selMes,#id_empresa_base{
+         width: 95%;
+    }
+    .mnuHeader{
+        font-size: 1.2em;
+    } 
+    .opCtasCob,.opAgenda{
+        width: 98%;
+    }    
+    .Peque{
+      font-size: 0.7em !important;
+    }  
+    #agendaNewCita{   
+       height: 42em;  
+    }   
+    #tablaFranjaHoraria tr td{
+        padding: 0px;
+        width: 2px;
+        height: 2px;
+    } 
+    #msgLicencia{
+       font-size: 1em;
+    }
+    #mnuCortesCaja table {
+       width: 100%;
+       margin-left: 0px;
+    }                  
+}  
