@@ -1,5 +1,5 @@
 <?php ini_set("session.gc_maxlifetime", 28800);ini_set("session.cookie_lifetime",28800); session_start();
-     
+
       #----------------CONTROL DE PROFUNDIDAD----------------
       $PROF="../../";
 
@@ -7,45 +7,79 @@
       session_destroy();
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-      <meta http-equiv="Expires" content="0">
-      <meta http-equiv="Last-Modified" content="0">
-      <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
-      <meta HTTP-EQUIV="Expires" CONTENT="-1">   
-      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-      <meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <html lang="es">
-      <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-      <script type="text/javascript" src="js/autenticacion.js?v=1.0.7"></script>
-      <link type="text/css" href="css/estilos_sys.css" rel="stylesheet" >
-      <link type="text/css" href="css/estilos.css?v=1.0.0" rel="stylesheet" >      
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <title>
+    Argon Dashboard 2 PRO by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+
 </head>
-<body>
 
-<div id="imgAutentic">
-    
-    <center>
-       <img id="logoSs" src="img/site_logo.png?v=1.0.1">
-       <div style="clear: both;"></div>
-       <label id="textIngresar">Administrador.</label>
-    </center>
+<body class="">
 
-    <br>
-    
-    <div id="imgAutUser" class="imgAuth"><img id="logoSs" src="img/002-man-user.png"></div>    
-    <input type="text" id="nombreUser" placeholder="Usuario"  value="">
-    <div style="clear: both;"></div>    
-    <div id="imgAutPass" class="imgAuth"><img id="logoSs" src="img/001-lock.png"></div>
-    <input type="password" placeholder="Contrase&ntilde;a" id="contraUser" value="">
+  <main class="main-content main-content-bg mt-0">
+    <div class="page-header min-vh-100" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-basic.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-7">
+            <div class="card border-0 mb-0">
+              <div class="card-header bg-transparent">
+                <h5 class="text-dark text-center mt-2 mb-3">Inisiar sesion</h5>
 
-    <div style="clear: both; height: 1em;"></div>
-    <a href="#" class="btn_comando" id="btnIngresar"> <img id="imgIngresar" src="img/sign-out-option.png"> <label>Ingresar</label></a>
-    <a href="../../../index.html" class="btn_comando" id="btnCancelar" ><img src="img/open-exit-door.png"> <label>Cancelar</label></a>
+              </div>
+              <div class="card-body px-lg-5 pt-0">
+                <div class="text-center text-muted mb-4">
+                  <small>Ingresa con tus credenciales</small>
+                </div>
 
-</div>  
+                  <div class="mb-3">
+                    <input type="text" id="nombreUser" class="form-control" placeholder="Email" aria-label="Email" value="">
+                  </div>
+                  <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" id="contraUser" value="">
+                  </div>
+
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary w-100 my-4 mb-2" id="btnIngresar">Ingresar</button>
+                  </div>
 
 
-<div id="msgSist"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/autenticacion.js?v=1.0.7"></script>
+
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
+
+</html>

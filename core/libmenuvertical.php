@@ -11,7 +11,7 @@
       public $menuLateral_color_texto_inabil;
       public $menuLateral_color_texto;
 
-      /*colores del menú rápido*/
+      /*colores del menï¿½ rï¿½pido*/
       public $ancho_contenedor_opciones_menu_rapido;
       public $panelComandosRapidos_color_fondo;
       public $color_texto_titulo_menu_rapido;
@@ -112,8 +112,8 @@
           $this->ShowAll=$true_o_false;
       } 
 
-      /*----------Función para definir menú rápidos-------------*/
-      function addMnuBloque($idPrivilegio=array(),$CaptionMnu,$imgMnu,$urlMnu="#"){  
+      /*----------Funciï¿½n para definir menï¿½ rï¿½pidos-------------*/
+      function addMnuBloque($idPrivilegio,$CaptionMnu,$imgMnu='',$urlMnu="#"){
          if(is_priv($idPrivilegio[0],"boolean") || $idPrivilegio[0]=="" || count($idPrivilegio)==0){
 
              $auxCod="";
@@ -130,10 +130,10 @@
                  if( $this->SubMnuSelected != "" && $this->SubMnuSelected==$privMark ){ $classAdd=" MnuSelOp "; }
              }              
 
-             //Desabilita hipervínculo
+             //Desabilita hipervï¿½nculo
              if($urlMnu=="#"){ $auxCod=' onclick="return false;" '; }
 
-             //Anexa código HTML de menú
+             //Anexa cï¿½digo HTML de menï¿½
              $this->htmlMnuBloque.='<a class="mnuOpRapido '.$privMark.$classAdd.'" '.$auxCod.' title="'.$CaptionMnu.'" href="'.$urlMnu.'">
                                    <img src="'.$this->Profundidad.'../crm/img/bloque/'.$imgMnu.'">
                                    <div style="clear:both;"></div>
@@ -415,7 +415,7 @@
             }
             $code.='</div>';
 
-            //Código del menú rapido
+            //Cï¿½digo del menï¿½ rapido
             if($menuRapido){           
 
               switch ($this->tipoMenu) {
@@ -441,7 +441,7 @@
             return $code;      	
       }	
 
-      //Añade Una Opcion al menu rápido
+      //Aï¿½ade Una Opcion al menu rï¿½pido
       function addItemAuxMenuRapido($nuevoId,$Caption){
               switch ($this->tipoMenu) {
                 case 'menuAcordeon':
@@ -485,7 +485,7 @@
 
       function ShowMenuRapido($Caption){
 
-        //=========== Oculta elementos del menú ===========
+        //=========== Oculta elementos del menï¿½ ===========
         $setSimplifi="";
         if(isset($_GET["setSimplifi"])){
             $setSimplifi="display:none;";
@@ -494,7 +494,7 @@
         }
         //=================================================
 
-          $Caption=str_replace("ñ", "&ntilde;", $Caption);
+          $Caption=str_replace("ï¿½", "&ntilde;", $Caption);
 
           switch ($this->tipoMenu) {
             case 'menuAcordeon':
@@ -546,7 +546,7 @@
       	echo 'var colorResalteMenu="'.$this->menuLateral_color_fondo_resalte.'";';
         echo "</script>";
 
-        //=========== Oculta elementos del menú ===========
+        //=========== Oculta elementos del menï¿½ ===========
         $setSimplifi="";
         if(isset($_GET["setSimplifi"])){
             $setSimplifi="display:none;";

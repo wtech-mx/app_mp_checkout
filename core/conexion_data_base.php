@@ -10,7 +10,7 @@ class Conexion
     var $base;
     var $manejador;
     var $data_source;
-    function Conexion()
+    function __construct()
     {
 
         $this->manejador="MySQL";
@@ -76,7 +76,7 @@ class sQuery
     protected $affect;
     protected $nColum;    
 
-    function sQuery()
+    function __construct()
     { 
         $this->coneccion= new Conexion(); 
     }
@@ -98,15 +98,7 @@ class sQuery
             $cons = str_replace(array("º", "¨","~","¨","´","`","ª","¬","\"","·","Ç","^"),'',$cons);
         }
 
-            //Ejecuta la consulta
-            switch ($this->coneccion->manejador){
-              case 'SQL Server':                        
-                            $this->consulta= odbc_exec($this->coneccion->getConexion(),$cons);
-                break;
-              case 'MySQL':
-                            $this->consulta= mysqli_query($this->coneccion->getConexion(),$cons);
-                break;          
-            }               
+            $this->consulta= mysqli_query($this->coneccion->getConexion(),$cons);
 
         return $this->consulta;
     }   
