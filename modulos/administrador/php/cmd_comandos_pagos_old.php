@@ -4,12 +4,12 @@ $PROF='../../../';
 
 if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operación"; exit(0); }
 
-            setlocale(LC_ALL,"es_ES@euro","es_ES","esp","es");  
-            date_default_timezone_set("America/Mexico_City");   
+            setlocale(LC_ALL,"es_ES@euro","es_ES","esp","es");
+            date_default_timezone_set("America/Mexico_City");
 
-            $mesA=array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");                           
+            $mesA=array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
-            include_once("../../../core/conexion_data_base.php");  
+            include_once("../../../core/conexion_data_base.php");
 
             //Retorna color en base a nombre de status
             function StatColor($status){
@@ -20,7 +20,7 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                     case 'Pagado': return '#04B404'; break;
                     case 'Proximo Mes': return '#FA58D0'; break;
                 }
-            }      
+            }
 
             //Retorna una lista de Sucursales a las que el usuario tiene derecho a entrar
             function HandelsUser(){
@@ -28,15 +28,15 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                 $coneccion=new sQuery();
                 $coneccion->executeQuery("select ids_cambio_sucursal from tusuarios where id='".$_SESSION["ID_PERSONAL"]."'");
                 if( $coneccion->getAffect() > 0 ){ while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { $ids_cambio_sucursal=$datos_text["ids_cambio_sucursal"]; }}
-                $coneccion->Close(); 
+                $coneccion->Close();
 
                 //Procesa Ids
                 if($ids_cambio_sucursal != ""){
                     $auxx="";
                     $vecAu=explode("|", $ids_cambio_sucursal);
-                    for ($i=0; $i < count($vecAu) ; $i++) { 
+                    for ($i=0; $i < count($vecAu) ; $i++) {
                       if( $vecAu[$i] != "" ){
-                        if( $auxx != "" ){ $auxx.=","; } 
+                        if( $auxx != "" ){ $auxx.=","; }
                         $auxx.="'".$vecAu[$i]."'";
                       }
                     }
@@ -47,11 +47,11 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                 if( $auxx != "" ){ $auxx.=",'-1'"; }
 
                 return $auxx;
-            }                        
+            }
 
             //Obtiene extención del archivo temporal del comprobante
             function optExtencion(){
-                        //Verifica si el archivo del comprobante se cargo correctamente            
+                        //Verifica si el archivo del comprobante se cargo correctamente
                         $rutaTmp="tmp/comprobante";
                         $nombreFile="pago_".session_id();
                         $rtaFull=$rutaTmp."/".$nombreFile;
@@ -74,42 +74,42 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
 
                         $coneccion=new sQuery();
                         $coneccion->executeQuery("delete from tcomprobantes_pago where id='".$id_registro."'");
-                        $coneccion->Close();                                    
+                        $coneccion->Close();
             }
 
                   //Activa solo licencias de sucursales independientes (Checks de sucursal)
                   //Solo se ejecuta si esta en el mes del periodo
-                  function ActivaLicenciasA($creditos="",$id_empresa_base=""){   
+                  function ActivaLicenciasA($creditos="",$id_empresa_base=""){
 
-                        if( (int)$id_empresa_base > 0 ){                  
-                            $suc_licencias="";                        
+                        if( (int)$id_empresa_base > 0 ){
+                            $suc_licencias="";
                             $vecHandels=array();
                             $coneccion=new sQuery();
                             $coneccion->executeQuery("SELECT id_empresa_base,handel,fecha_inicio FROM `tcontrol_cobros` WHERE status in('Comprobante Cargado','Pagado','Proximo Mes') and procesado='0' and tipo_licencia='mensual' and id_empresa_base='".$id_empresa_base."'");
                             if( $coneccion->getAffect() > 0 ){
-                                while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {                               
+                                while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
                                   if(!in_array($datos_text["handel"], $vecHandels)) {
                                       $suc_licencias.= $datos_text["handel"]."|";
                                       $vecHandels[]=$datos_text["handel"];
                                   }
                                 }
-                            } 
-                            $coneccion->Close(); 
+                            }
+                            $coneccion->Close();
 
-                            //Activa/Desactiva creditos de sucursales  
-                            if($creditos=="[".date("Y")."/".date("m")."]"){   
+                            //Activa/Desactiva creditos de sucursales
+                            if($creditos=="[".date("Y")."/".date("m")."]"){
                                 $suc_licencias_aux=$suc_licencias;
 
                                 //Activa sucursales que no se les cobra licencia
                                 $importe_pago_lic="";
                                 $que=new sQuery();
                                 $que->executeQuery("select importe_pago_lic from tempresas_base where id='".$id_empresa_base."'");
-                                if($que->getAffect() > 0){ while($datos_text = mysqli_fetch_array($que->getResults())){ $importe_pago_lic=$datos_text["importe_pago_lic"]; }} 
-                                $que->Close();  
+                                if($que->getAffect() > 0){ while($datos_text = mysqli_fetch_array($que->getResults())){ $importe_pago_lic=$datos_text["importe_pago_lic"]; }}
+                                $que->Close();
                                 if($importe_pago_lic != ""){
                                     $vecIm=explode("|", $importe_pago_lic);
                                     if( count($vecIm) > 1 ){
-                                         for ($i=0; $i < count($vecIm) ; $i++) { 
+                                         for ($i=0; $i < count($vecIm) ; $i++) {
                                              if( $vecIm[$i] != "" ){
                                                  $aux2=explode("/", $vecIm[$i]);
                                                  if(count($aux2)==2 && (float)$aux2[1]==0 ){
@@ -135,8 +135,8 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                                 $str_creditos="";
                                 $coneccion=new sQuery();
                                 $coneccion->executeQuery("select creditos from tempresas_base where id='".$id_empresa_base."'");
-                                if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $str_creditos=$datos_text["creditos"]; }} 
-                                $coneccion->Close(); 
+                                if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $str_creditos=$datos_text["creditos"]; }}
+                                $coneccion->Close();
 
                                 if($str_creditos != ""){
                                     $vecA=explode($creditos, $str_creditos);
@@ -144,11 +144,11 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                                     for ($i=0; $i <=count($vecA) ; $i++){ if($vecA[$i] != ""){ $creAux.=$vecA[$i]; } }
                                     $coneccion=new sQuery();
                                     $coneccion->executeQuery("update tempresas_base set creditos='".$creAux."' where id='".$id_empresa_base."'");
-                                    $coneccion->Close();                                       
+                                    $coneccion->Close();
                                 }
 
-                            }    
-                        }                     
+                            }
+                        }
                   }
 
                   function DesactivaAnualesAtrasados($id_empresa_base){
@@ -157,14 +157,14 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                           $coneccion=new sQuery();
                           $coneccion->executeQuery("SELECT id_empresa_base,handel,fecha_fin,importe_pago,is_factura FROM `tcontrol_cobros` WHERE status in('Pendiente','Pago Incorrecto') and procesado='0' and tipo_licencia='anual' and ban_atrasado='1' and id_empresa_base='".$id_empresa_base."'");
                           if( $coneccion->getAffect() > 0 ){
-                              while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
+                              while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
                                 $actualiza=new sQuery();
                                 $actualiza->executeQuery("update tpagos_anuales set chk='0' where id_empresa_base='".$datos_text["id_empresa_base"]."' and handel='".$datos_text["handel"]."' and fecha='".$datos_text["fecha_fin"]."' and importe_pago='".$datos_text["importe_pago"]."' and is_factura='".$datos_text["is_factura"]."'");
-                                $actualiza->Close();                              
+                                $actualiza->Close();
                               }
-                          } 
+                          }
                           $coneccion->Close();
-                      }        
+                      }
                   }
 
                   //Función para activar las licencias cargadas
@@ -178,49 +178,49 @@ if( !isset( $_POST['index'] ) ){ echo "No se recibieron los datos para la operac
                                     $coneccion=new sQuery();
                                     $coneccion->executeQuery("update tempresas_base set creditos=concat(creditos,'".$creditos."') where id='".$id_empresa_base."' and not creditos like '%".$creditos."%'");
                                     $coneccion->Close();
-                                }              
+                                }
 
                             //-------------- LICENCIAS ANUALES ---------------
-                          
+
                                 //Activa Licencia
                                 $coneccion=new sQuery();
                                 $coneccion->executeQuery("SELECT id_empresa_base,handel,fecha_fin,importe_pago,is_factura FROM `tcontrol_cobros` WHERE status in('Comprobante Cargado','Pagado','Proximo Mes') and procesado='0' and tipo_licencia='anual' and id_empresa_base='".$id_empresa_base."'");
                                 if( $coneccion->getAffect() > 0 ){
-                                    while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
+                                    while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
                                         $actualiza=new sQuery();
                                         $actualiza->executeQuery("update tpagos_anuales set chk='1' where id_empresa_base='".$datos_text["id_empresa_base"]."' and handel='".$datos_text["handel"]."' and fecha='".$datos_text["fecha_fin"]."' and importe_pago='".$datos_text["importe_pago"]."' and is_factura='".$datos_text["is_factura"]."'");
-                                        $actualiza->Close();                              
+                                        $actualiza->Close();
                                     }
-                                } 
-                                $coneccion->Close();                        
+                                }
+                                $coneccion->Close();
 
                                 //Desactiva Licencia
                                 $coneccion=new sQuery();
                                 $coneccion->executeQuery("SELECT id_empresa_base,handel,fecha_fin,importe_pago,is_factura FROM `tcontrol_cobros` WHERE status in('Pendiente','Pago Incorrecto') and procesado='0' and tipo_licencia='anual' and id_empresa_base='".$id_empresa_base."'");
                                 if( $coneccion->getAffect() > 0 ){
-                                    while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
+                                    while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
                                         $actualiza=new sQuery();
                                         $actualiza->executeQuery("update tpagos_anuales set chk='0' where id_empresa_base='".$datos_text["id_empresa_base"]."' and handel='".$datos_text["handel"]."' and fecha='".$datos_text["fecha_fin"]."' and importe_pago='".$datos_text["importe_pago"]."' and is_factura='".$datos_text["is_factura"]."'");
-                                        $actualiza->Close();                              
+                                        $actualiza->Close();
                                     }
-                                } 
-                                $coneccion->Close(); 
+                                }
+                                $coneccion->Close();
 
                             //-------------- HABILITA SUCURSALES INDIVIDUALES --------
 
                                 ActivaLicenciasA($creditos,$id_empresa_base);
-                                                                                        
 
-                        }        
-                                                
+
+                        }
+
 
                   }
-switch ($_POST['index']) {       
+switch ($_POST['index']) {
    case 1:  //--------- RETORNA LISTADO DE PAGOS PENDIENTES POR LA SUCURSAL ----------
 
                   $retu="";
                   $stat="";
-                  $creditos="";                  
+                  $creditos="";
                   $strPeriodoActual="";
                   $ban_iva="0";
                   $str_periodo='';
@@ -231,13 +231,11 @@ switch ($_POST['index']) {
                   $coneccion->executeQuery("SELECT t1.id,t2.nombre_empresa,(select nombreSucursal_Sel from tempresas where handel=t1.handel) as nombreSucursal_Sel,t1.handel,t1.fecha_inicio,t1.fecha_fin,t1.tipo_licencia,t1.is_factura,t1.importe_pago,t1.status,t1.comentarios,t1.ban_atrasado,t1.id_empresa_base,t1.cantidad_sms FROM tcontrol_cobros t1,tempresas_base t2 WHERE t1.id_empresa_base=t2.id and t1.procesado='0' ".$stat." order by t1.id_empresa_base asc,t1.ban_atrasado asc,t1.status asc,t1.tipo_licencia asc");
 
                   if( $coneccion->getAffect() > 0 ){
-                      while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
+                      while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
 
                         $fechaP="";
 
                         $retu.='<a id="cuadro_'.$datos_text["id"].'" href="#" data-id_empresa_base="'.$datos_text["id_empresa_base"].'" data-id="'.$datos_text["id"].'" data-status="'.$datos_text["status"].'" class="contenedor">';
-//                        $retu.='<a class="col-lg-4 col-md-6 mb-4 mb-lg-0 card p-2"  id="cuadro_'.$datos_text["id"].'" href="#" data-id_empresa_base="'.$datos_text["id_empresa_base"].'" data-id="'.$datos_text["id"].'" data-status="'.$datos_text["status"].'">';
-
 
                         //Inicio
                         $dia_ini=date("d",strtotime($datos_text["fecha_inicio"]));
@@ -246,25 +244,25 @@ switch ($_POST['index']) {
                         //Fin
                         $dia_fin=date("d",strtotime($datos_text["fecha_fin"]));
                         $mes_fin=date("m",strtotime($datos_text["fecha_fin"]));
-                        $anio_fin=date("Y",strtotime($datos_text["fecha_fin"]));   
+                        $anio_fin=date("Y",strtotime($datos_text["fecha_fin"]));
 
                         if($mes_fin==$mes_ini && $anio_ini==$anio_fin){
                            $periodo=$dia_ini.' a '.$dia_fin.' de '.$mesA[ (int)$mes_ini ].' de '.$anio_fin;
                         } else {
                            $periodo=date("d/m/Y",strtotime($datos_text["fecha_inicio"])).' a '.date("d/m/Y",strtotime($datos_text["fecha_fin"]));
-                        }  
+                        }
 
                         //Link para consultar el comprobante cargado
-                        $viewComprobante="<a href='#' data-id='".$datos_text["id"]."' class='viewComp' style='color:red'>Existe un error en el comprobante de pago.</a>"; 
+                        $viewComprobante="<a href='#' data-id='".$datos_text["id"]."' class='viewComp' style='color:red'>Existe un error en el comprobante de pago.</a>";
 
                         //Identifica inicio del periodo
                         switch ($datos_text["tipo_licencia"]) {
                              case 'mensual':
-                                  $creditos="[".date("Y",strtotime($datos_text["fecha_inicio"]))."/".date("m",strtotime($datos_text["fecha_inicio"]))."]";                                                         
+                                  $creditos="[".date("Y",strtotime($datos_text["fecha_inicio"]))."/".date("m",strtotime($datos_text["fecha_inicio"]))."]";
                                   $str_periodo=$mesA[ (int)$mes_ini ].' de '.$anio_fin;
 
                                   $retu.='<b><h1>Licencia '.utf8_encode($datos_text["nombreSucursal_Sel"]).'</h1></b>';
-                                  $retu.='<h3>'.$periodo.'</h3>'; 
+                                  $retu.='<h3>'.$periodo.'</h3>';
 
                                   if($datos_text["status"]=="Pago Incorrecto"){
                                      $datos_text["comentarios"].=$viewComprobante;
@@ -283,20 +281,20 @@ switch ($_POST['index']) {
 
                                break;
                              case 'SMS':
-                                  $retu.='<b><h1><img src="img/sms.png"> Comprar créditos SMS</h1></b>';  
+                                  $retu.='<b><h1><img src="img/sms.png"> Comprar créditos SMS</h1></b>';
                                   $retu.='<label data-id="'.$datos_text["id"].'" class="cancelProgSMS">Cancelar compra</label>';
                                   if($datos_text["comentarios"] != ""){
                                       $aux="";
                                       $totalCred=0;
                                       $vecAux=explode("|", $datos_text["comentarios"]);
-                                      for ($i=0; $i < count($vecAux) ; $i++) { 
+                                      for ($i=0; $i < count($vecAux) ; $i++) {
                                           if( $vecAux[$i] != "" ){
                                               $vec2=explode("/", $vecAux[$i]);
                                               $aux.='<tr><td>'.$vec2[0].'</td><td style="text-align:right;">'.$vec2[1].'</td></tr>';
                                               $totalCred+=(int)$vec2[1];
                                           }
                                       }
-                                      if($aux != ""){                                        
+                                      if($aux != ""){
                                           $aux.='<tr><td style="text-align:right"><b>Total..:</b></td><td style="text-align:right; border-top:1px solid #08298A;"><b>'.$totalCred.'</b></td></tr>';
                                           $aux='<tr><th>&nbsp;Sucursal&nbsp;</th><th><center>&nbsp;'.utf8_decode('Créditos').'&nbsp;</center></th></tr>'.$aux;
                                           $datos_text["comentarios"]='<table class="tablDetSMS">'.$aux.'</table>';
@@ -305,11 +303,11 @@ switch ($_POST['index']) {
 
                                   if($datos_text["status"]=="Pago Incorrecto"){
                                      $datos_text["comentarios"]=$viewComprobante."<br>".$datos_text["comentarios"];
-                                  }                                  
-                               break;                           
-                        }   
+                                  }
+                               break;
+                        }
 
-                        //Coloca encabezado       
+                        //Coloca encabezado
 
                         $retu.='</center>';
                         $retu.='<hr>';
@@ -339,19 +337,19 @@ switch ($_POST['index']) {
                                    <td>:&nbsp;</td>
                                    <td class="comentCeld">'.utf8_encode($datos_text["comentarios"]).'</td>
                              </tr>                                                                                      
-                         </table>';                         
+                         </table>';
 
                         $retu.='</a>';
 
                       }
-                  } 
+                  }
                   $coneccion->Close();
-                  
+
                   if($retu==""){
                     echo '<hr><div class="noResultados"><font color="#298A08"><b>* No existen pagos pendientes.</b></font></div><hr>';
                   } else {
                      echo $retu;
-                  }  
+                  }
 
                   echo "<div style='clear:both'></div><br><br><br><br>";
 
@@ -360,12 +358,12 @@ switch ($_POST['index']) {
                         <input type="hidden" id="str_periodo" value="'.$str_periodo.'">
                         <input type="hidden" id="ban_iva" value="'.$ban_iva.'">';
 
-      break; 
+      break;
     case 2:  ##################### OBTIENE CONTROLADOR PARA CARGAR DOCUMENTO ########################
 
                   $vec=explode("|", $_POST["ids"]);
                   $auxv="";
-                  for ($i=0; $i < count($vec) ; $i++) { 
+                  for ($i=0; $i < count($vec) ; $i++) {
                     if( $vec[$i] != "" ){
                         if( $auxv != "" ){ $auxv.=","; }
                         $auxv.="'".$vec[$i]."'";
@@ -379,8 +377,8 @@ switch ($_POST['index']) {
                   $coneccion->executeQuery("SELECT t1.id,t1.handel,t2.nombre_empresa,(SELECT nombreSucursal_Sel from  tempresas where handel=t1.handel) as nombreSucursal_Sel,t1.fecha_inicio,t1.fecha_fin,t1.tipo_licencia,t1.importe_pago FROM tcontrol_cobros t1,tempresas_base t2 WHERE t1.id in(".$auxv.") and t1.id_empresa_base=t2.id");
                   if( $coneccion->getAffect() > 0 ){
                       $totAll=$coneccion->getAffect();
-                      while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
-                         if((int)$datos_text["handel"] > 0){ $nombreSucursal_Sel= utf8_encode($datos_text["nombreSucursal_Sel"]); } else { $nombreSucursal_Sel= "Todas"; }                         
+                      while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
+                         if((int)$datos_text["handel"] > 0){ $nombreSucursal_Sel= utf8_encode($datos_text["nombreSucursal_Sel"]); } else { $nombreSucursal_Sel= "Todas"; }
 
                           $numx++;
 
@@ -391,10 +389,10 @@ switch ($_POST['index']) {
                                     <td style="text-align:right; border-right: 1px solid #D8D8D8;">'.number_format($datos_text["importe_pago"],2,".",",").'</td>
                                  </tr>';
 
-                          $total_cuenta+=number_format($datos_text["importe_pago"],2,".","");        
+                          $total_cuenta+=number_format($datos_text["importe_pago"],2,".","");
                       }
-                  } 
-                  $coneccion->Close();  
+                  }
+                  $coneccion->Close();
 
                   $head="<tr>
                               <th style='width:10%'>#</th>
@@ -411,9 +409,9 @@ switch ($_POST['index']) {
                           <form id="formSub" action="recursos/php/upload_comprobante_pago.php" class="dropzone" ></form>        
                         </div>';
 
-                  echo "<input type='hidden' id='TotalImportComprobante' value='".number_format($total_cuenta,2,".","")."'>";      
+                  echo "<input type='hidden' id='TotalImportComprobante' value='".number_format($total_cuenta,2,".","")."'>";
 
-         break; 
+         break;
     case 3:  ##################### HABILITA DE NUEVO TODOS LOS MENUS ########################
 
             unset($_SESSION["msg_blk"]);
@@ -423,8 +421,8 @@ switch ($_POST['index']) {
             $nombre_empresa="";
             $coneccion=new sQuery();
             $coneccion->executeQuery("select nombre_empresa from tempresas_base where id='".$_POST["id_empresa_base"]."'");
-            if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $nombre_empresa=utf8_encode($datos_text["nombre_empresa"]); }} 
-            $coneccion->Close();              
+            if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $nombre_empresa=utf8_encode($datos_text["nombre_empresa"]); }}
+            $coneccion->Close();
 
             //Envia un correo de notificación, avisando del pago.
             include_once("../../../../core/email.php");
@@ -438,14 +436,14 @@ switch ($_POST['index']) {
 
             //Reintenta envios de Email.
             $exito = $email->Send($_SESSION["nombreEmpresa_Sel"],$cuerpoMail);
-            $intentos=1; 
+            $intentos=1;
             while ((!$exito) && ($intentos < 5)) {
                 sleep(5);
                 $exito = $email->Send($_SESSION["nombreEmpresa_Sel"],$cuerpoMail);
                 $intentos=$intentos+1;
-            }             
-          
-         break; 
+            }
+
+         break;
     case 4:  ##################### MESTRA INSTRUCCIONES PARA PAGO ########################
 
             switch ($_POST["ban_iva"]) {
@@ -457,15 +455,15 @@ switch ($_POST['index']) {
                    $clabe="044900256038112605";
                    $beneficiario="Dora Luz Montero Vírgen";
                    $RFC="MOVD830827KL1";
-                   */                   
-                   
+                   */
+
                    /*
                    $nombre_banco="Scotiabank";
                    $cuenta="06701231928";
                    $tarjetaNo="5579 2200 0951 2173";
                    $clabe="044900067012319286";
                    $beneficiario="Juan Miguel Salomon Villegas";
-                   $RFC="SAVJ780830TV3"; 
+                   $RFC="SAVJ780830TV3";
                    */
                    $nombre_banco="BBVA Bancomer";
                    $cuenta="1562178729";
@@ -482,10 +480,10 @@ switch ($_POST['index']) {
                    $clabe="012680004561816008";
                    $beneficiario="Edgar Luis Hernández García";
                    $RFC="HEGE830812D60";
-                break;                
+                break;
             }
 
-            //----------------------------------------------------------------------------           
+            //----------------------------------------------------------------------------
 
             echo "<h2>Estimado Cliente</h2>";
 
@@ -531,16 +529,16 @@ switch ($_POST['index']) {
             echo "</ol>";
 
             echo "<p>Para mas información consulte el artículo <a target='_blank' href='https://sistemasyservicios.mx/web/articulos/28/activacion-de-licencias'>Activación de Licencias</a></p>";
-          
-         break; 
-    case 5:  ##################### RETORNA SUCURSALES PARA COMPRA DE CRÉDITOS SMS ######################## 
-                                                                                                       
+
+         break;
+    case 5:  ##################### RETORNA SUCURSALES PARA COMPRA DE CRÉDITOS SMS ########################
+
 
             $retu="";
             $coneccion=new sQuery();
             $coneccion->executeQuery("SELECT t1.handel,t1.nombreSucursal_Sel,((SELECT ifnull(sum(cantidad_sms),0) FROM tcreditos_sms WHERE handel=t1.handel)-(SELECT ifnull(sum(cantidad_sms),0) FROM tconsumos_sms WHERE handel=t1.handel)) as creditos_sms FROM tempresas t1 WHERE t1.id_empresa_base='".$_POST["id_empresa_base"]."' and t1.handel in(".HandelsUser().") order by t1.nombreSucursal_Sel asc");
             if( $coneccion->getAffect() > 0 ){
-                while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ 
+                while ($datos_text = mysqli_fetch_array($coneccion->getResults())){
 
                     if((int)$datos_text["creditos_sms"]==0){
                       $strCred='<font color="red">0</font>';
@@ -554,79 +552,79 @@ switch ($_POST['index']) {
                     $retu.='<td><select id="cred_sms_'.$datos_text["handel"].'" data-handel="'.$datos_text["handel"].'" data-nombreSuc="'.utf8_encode($datos_text["nombreSucursal_Sel"]).'" class="cred_sms"><option selected value="">( ninguno )</option><option value="25">25 SMS</option><option value="50">50 SMS</option><option value="60">60 SMS</option><option value="70">70 SMS</option><option value="100">100 SMS</option><option value="150">150 SMS</option><option value="200">200 SMS</option><option value="300">300 SMS</option><option value="450">450 SMS</option><option value="600">600 SMS</option><option value="800">800 SMS</option><option value="1000">1000 SMS</option><option value="1500">1500 SMS</option><option value="2500">2500 SMS</option><option value="3500">3500 SMS</option><option value="5000">5000 SMS</option></select> </td>';
                     $retu.='</tr>';
                 }
-            } 
-            $coneccion->Close(); 
+            }
+            $coneccion->Close();
 
             $encab='<tr>';
             $encab.='<th>Sucursal</th>';
             $encab.='<th>Créditos Actuales</th>';
             $encab.='<th>Comprar Créditos</th>';
             $encab.='</tr>';
-            
+
             if($retu == ""){ $retu.='<tr><td colspan="3"><div class="noResultados"><font color="#298A08"><b>* No existen resultados para mostrar.</b></font></div></td></tr>'; }
 
             echo '<center><table id="tablaCompraSMS" cellspacing="0" cellpadding="0">'.$encab.$retu.'</table></center>';
 
-         break; 
-    case 6:  ##################### AGREGA REGISTRO PARA COBRO SMS ########################   
+         break;
+    case 6:  ##################### AGREGA REGISTRO PARA COBRO SMS ########################
 
             //Obtiene el periodo Correcto
-            $fecha_inicio = ""; 
-            $fecha_fin = ""; 
+            $fecha_inicio = "";
+            $fecha_fin = "";
 
             //Si no existe al menos un periodo abierto no prosigue
             $coneccion=new sQuery();
             $coneccion->executeQuery("SELECT fecha_inicio,fecha_fin FROM `tcontrol_cobros` WHERE fecha_pago is null order by id DESC limit 1");
             if( $coneccion->getAffect() > 0 ){
-                while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ 
+                while ($datos_text = mysqli_fetch_array($coneccion->getResults())){
                     $fecha_inicio= $datos_text['fecha_inicio'];
                     $fecha_fin=$datos_text['fecha_fin'];
                 }
-            } 
-            $coneccion->Close(); 
+            }
+            $coneccion->Close();
 
             if($fecha_inicio=='' || $fecha_fin==''){
-               
-               die("No es posible registrar la compra de créditos en éste momento."); 
+
+               die("No es posible registrar la compra de créditos en éste momento.");
 
             } else {
                 //Añade registro de control de cobro
                 $coneccion=new sQuery();
                 $coneccion->executeQuery("insert into tcontrol_cobros(id_empresa_base,handel,fecha_generacion,importe_pago,tipo_licencia,status,str_suc_sms,comentarios,cantidad_sms,fecha_inicio,fecha_fin) values ('".$_POST["id_empresa_base"]."','-1',now(),'".$_POST["totCompra"]."','SMS','Pendiente','".$_POST["cadAcum"]."','".$_POST["comentario"]."','".$_POST["cantidadSMS"]."','".$fecha_inicio."','".$fecha_fin."')");
-                if( $coneccion->getAffect() > 0 ){ echo "1"; } else { echo "No fue posible agregar la compra."; } 
-                $coneccion->Close(); 
+                if( $coneccion->getAffect() > 0 ){ echo "1"; } else { echo "No fue posible agregar la compra."; }
+                $coneccion->Close();
             }
 
-         break; 
-    case 7:  ##################### RETORNA CANTIDAD DE CREDITOS SMS ACTUALES ########################                                                                                                                      
-            
+         break;
+    case 7:  ##################### RETORNA CANTIDAD DE CREDITOS SMS ACTUALES ########################
+
 
             function getNCreditosSMS($handels){
                 $retu=0;
                 $coneccion=new sQuery();
                 $coneccion->executeQuery("SELECT ifnull(sum((SELECT ifnull(sum(cantidad_sms),0) FROM tcreditos_sms WHERE handel=t1.handel)-(SELECT ifnull(sum(cantidad_sms),0) FROM tconsumos_sms WHERE handel=t1.handel)),0) as creditos_sms FROM tempresas t1 WHERE t1.handel in(".$handels.")");
-                if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $retu=$datos_text["creditos_sms"];}} 
+                if( $coneccion->getAffect() > 0 ){while ($datos_text = mysqli_fetch_array($coneccion->getResults())){ $retu=$datos_text["creditos_sms"];}}
                 $coneccion->Close();
-                return (int)$retu; 
+                return (int)$retu;
             }
 
             $retu=getNCreditosSMS(HandelsUser());
 
             echo $retu;
-         break;  
-    case 8:  ##################### CANCELA COBRO DE CREDITOS SMS ########################                                                                                                                      
+         break;
+    case 8:  ##################### CANCELA COBRO DE CREDITOS SMS ########################
             $retu=0;
 
             $coneccion=new sQuery();
             $coneccion->executeQuery("delete from tcomprobantes_pago_aux where id_control_cobros='".$_POST["idCobro"]."'");
-            $coneccion->Close(); 
+            $coneccion->Close();
 
             $coneccion=new sQuery();
             $coneccion->executeQuery("delete from tcontrol_cobros where id_empresa_base='".$_POST["id_empresa_base"]."' and id='".$_POST["idCobro"]."'");
-            if( $coneccion->getAffect() > 0 ){ $retu=1; } 
-            $coneccion->Close(); 
+            if( $coneccion->getAffect() > 0 ){ $retu=1; }
+            $coneccion->Close();
             echo $retu;
-         break;   
+         break;
     case 9:  ##################### VERIFICA SI SE CARGO EL COMPROBANTE ########################
 
 
@@ -638,23 +636,23 @@ switch ($_POST['index']) {
                 echo "1";
             }
 
-         break;    
+         break;
     case 10:  ##################### ACOMPLETA REGISTRO DE CARGA DE COMPROBANTE ########################
             $banLicPeriodo = true;
 
             //Obtiene Extencion y nombre de archivo
             $ext=optExtencion();
-            $nombreFileTmp="tmp/comprobante/pago_".session_id().$ext;            
+            $nombreFileTmp="tmp/comprobante/pago_".session_id().$ext;
 
             //Separa ids de registros de pago
-            $idsRp=explode("|", $_POST["ids_registros"] ); 
+            $idsRp=explode("|", $_POST["ids_registros"] );
             if( count($idsRp) <=1 ){ echo "No fue posible procesar los registros de pago."; exit(0); }
 
             //Inserta registro principal de cobro
             $guarda=false;
             $coneccion=new sQuery();
             $coneccion->executeQuery("insert into tcomprobantes_pago(nombre_archivo,ext_file,importe_total,fecha_carga,id_session) values ('{pendiente}','".$ext."','".$_POST["importe_total"]."',now(),'".session_id()."')");
-            if( $coneccion->getAffect() > 0 ){ $guarda=true; } 
+            if( $coneccion->getAffect() > 0 ){ $guarda=true; }
             $coneccion->Close();
             if($guarda==false){ echo "No fue posible ingresar el registro del comprobante."; exit(0); }
 
@@ -663,16 +661,16 @@ switch ($_POST['index']) {
             $id_registro="{error}";
             $coneccion=new sQuery();
             $coneccion->executeQuery("select id from tcomprobantes_pago where nombre_archivo='{pendiente}' and id_session='".session_id()."'");
-            if( $coneccion->getAffect() == 1 ){ 
+            if( $coneccion->getAffect() == 1 ){
                 $datos_text = mysqli_fetch_array($coneccion->getResults());
-                $id_registro=(int)$datos_text["id"]; 
+                $id_registro=(int)$datos_text["id"];
             }
-            $coneccion->Close();  
+            $coneccion->Close();
             if( $id_registro=="{error}" || (int)$id_registro <= 0 ){
                 $coneccion=new sQuery();
                 $coneccion->executeQuery("delete from tcomprobantes_pago where nombre_archivo='{pendiente}' and id_session='".session_id()."'");
-                $coneccion->Close();    
-                echo "Error al cargar el registro, intente de nuevo."; exit(0);               
+                $coneccion->Close();
+                echo "Error al cargar el registro, intente de nuevo."; exit(0);
             }
             $nuevoNombre=$id_registro.date("dmYHms").$ext;
 
@@ -681,18 +679,18 @@ switch ($_POST['index']) {
             //Acompleta info en registro principal
             $coneccion=new sQuery();
             $coneccion->executeQuery("update tcomprobantes_pago set nombre_archivo='".$nuevoNombre."',id_session='' where id='".$id_registro."'");
-            $coneccion->Close(); 
+            $coneccion->Close();
 
             //Ingresa los detalles del registro de cobranza
             $contReg=0;
             $acumIds="";
-            for ($i=0; $i < count($idsRp) ; $i++) { 
+            for ($i=0; $i < count($idsRp) ; $i++) {
               if( $idsRp[$i] != "" ){
 
                   //Borra vinculo anterior
                   $coneccion=new sQuery();
                   $coneccion->executeQuery("delete from tcomprobantes_pago_aux where id_comprobante_pago != '".$id_registro."' and id_control_cobros='".$idsRp[$i]."'");
-                  $coneccion->Close();                  
+                  $coneccion->Close();
 
                   //Crea nuevo vinculo
                   $coneccion=new sQuery();
@@ -715,14 +713,14 @@ switch ($_POST['index']) {
             //Limpia registros de cobranza oxoletos
             $coneccion=new sQuery();
             $coneccion->executeQuery("delete from `tcomprobantes_pago` where not id in( select id_comprobante_pago from tcomprobantes_pago_aux)");
-            $coneccion->Close();  
+            $coneccion->Close();
 
 
             //-------------- ARCHIVA COMPROBANTE DE PAGO ----------------
             $rutaArchivo=$PROF."../app/pagos";
 
             //Si no existe la ruta de destino la crea
-            if(!file_exists($rutaArchivo)){ mkdir($rutaArchivo, 0777, true); }            
+            if(!file_exists($rutaArchivo)){ mkdir($rutaArchivo, 0777, true); }
 
             //Si ya existe un archivo de destino lo elimina
             if(file_exists($rutaArchivo."/".$nuevoNombre)){ unlink($rutaArchivo."/".$nuevoNombre, 0777, true); }
@@ -753,10 +751,10 @@ switch ($_POST['index']) {
             $coneccion=new sQuery();
             $coneccion->executeQuery("select id,id_empresa_base,str_suc_sms from tcontrol_cobros where tipo_licencia='SMS' and id in(".$acumIds.")");
             if( $coneccion->getAffect() > 0 ){
-                while ($datos_text = mysqli_fetch_array($coneccion->getResults())) { 
+                while ($datos_text = mysqli_fetch_array($coneccion->getResults())) {
                      $vecAux=explode("|", $datos_text["str_suc_sms"]);
                      if(count($vecAux) > 0){
-                         for ($i=0; $i < count($vecAux) ; $i++) { 
+                         for ($i=0; $i < count($vecAux) ; $i++) {
                             if( $vecAux[$i] != "" ){
                                 $auxx=explode("/", $vecAux[$i]);
                                 $actua=new sQuery();
@@ -766,16 +764,16 @@ switch ($_POST['index']) {
                          }
                      }
                 }
-            } 
-            $coneccion->Close();  
+            }
+            $coneccion->Close();
 
 
-            //--------------------------------------------------                
+            //--------------------------------------------------
 
             echo "1";
 
 
-         break;                                   
+         break;
    default:
          echo "Comando no reconocido ".$_POST['index'];
       break;

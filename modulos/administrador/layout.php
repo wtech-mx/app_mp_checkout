@@ -45,17 +45,18 @@
 
     <style type="text/css">
              .contenedor{
-                border:2px solid #848484;
                 padding: 10px;
                 margin: 10px;
                 box-shadow: 2px 2px 5px #999;
                 width: 292px;
                 color: #1C1C1C;
-                background-color: #FBF2EF;
+                background-color: #cccccc;
                 float: left;
                 height: 220px;
                 overflow-y: auto;
                 text-decoration: none;
+                border: 3px solid #35363a;
+                border-radius: 15px;
              }
              .contenedor:hover{
                 cursor: pointer;
@@ -115,8 +116,9 @@
 
              /*Cargar comprobante de pago*/
              .selPendiente{
-                background-color: #F5D0A9;
-                border: 2px solid black;
+                background-color: #ffffff;
+                border: 2px solid #35363a;
+                 border-radius: 15px;
              }
              .btnDisabled{
                  opacity: 0.2 !important;

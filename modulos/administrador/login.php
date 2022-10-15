@@ -41,6 +41,10 @@
           <div class="col-lg-4 col-md-7">
             <div class="card border-0 mb-0">
               <div class="card-header bg-transparent">
+                  <p class="text-center">
+                      <img src="./img/logo-kuali.png" alt="" style="width: 150px">
+                  </p>
+
                 <h5 class="text-dark text-center mt-2 mb-3">Inisiar sesion</h5>
 
               </div>

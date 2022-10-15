@@ -16,7 +16,8 @@
         <script src="js/bootstrap-datepicker.min.js"></script>
         <script src="js/bootstrap-datepicker.es.min.js"></script>        
         <script src="js/comandos.js?v=1.0.7"></script>
-        <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+
+         <!--<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >-->
         <link type="text/css" href="css/bootstrap-datepicker3.min.css" rel="stylesheet" >
         <link type="text/css" href="'.$PROF.'css/alertify.default.css" rel="stylesheet" >
         <link type="text/css" href="'.$PROF.'css/alertify.core.css" rel="stylesheet" >
