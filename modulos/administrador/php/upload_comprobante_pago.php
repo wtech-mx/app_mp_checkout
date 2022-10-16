@@ -1,4 +1,6 @@
-<?php session_start();
+<?php
+
+session_start();
 
 define('KB', 1024);
 define('MB', 1048576);
@@ -41,7 +43,6 @@ if($_FILES['file']['name']){
 		echo 'Error al subir el archivo:  Asegurese que el archivo no exceda a 1.5MB';
 	}
 }
-
 
 
 ?>

@@ -1,5 +1,5 @@
 <?php ini_set("session.gc_maxlifetime", 28800);ini_set("session.cookie_lifetime",28800); session_start();        
-      include_once("php/encabezado.php");
+      include_once("php/encabezado_old.php");
       $_SESSION["pagLic"]="1";
       include_once("php/menu.php"); 
 
