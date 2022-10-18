@@ -1,48 +1,41 @@
 <?php @include('./layout.php')  ?>
 
-
 <div id="idContenedor">
 
     <div class="row mt-4">
 
-<!--        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">-->
-<!--          <div class="card h-100 ">-->
-<!--            <div class="card-body pt-0">-->
+    <!--        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">-->
+    <!--          <div class="card h-100 ">-->
+    <!--            <div class="card-body pt-0">-->
 
-                <div class="" id="mnuDescPagos"></div>
+                    <div class="" id="mnuDescPagos"></div>
 
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
 
-    </div>
+        </div>
 
 
-<!--       <div id="btn_carga_sms" title="Comprar créditos SMS">-->
-<!--           <table>-->
-<!--                 <tr>-->
-<!--                     <td><img src="img/sms.png">&nbsp;</td>-->
-<!--                     <td><label id="nCredit">-</label></td>-->
-<!--                     <td>&nbsp;&nbsp;</td>-->
-<!--                     <td>&nbsp;&nbsp;</td>-->
-<!--                     <td>&nbsp;Comprar Créditos SMS&nbsp;</td>-->
-<!--                 </tr>-->
-<!--           </table>-->
-<!--       </div>-->
+    <!--       <div id="btn_carga_sms" title="Comprar créditos SMS">-->
+    <!--           <table>-->
+    <!--                 <tr>-->
+    <!--                     <td><img src="img/sms.png">&nbsp;</td>-->
+    <!--                     <td><label id="nCredit">-</label></td>-->
+    <!--                     <td>&nbsp;&nbsp;</td>-->
+    <!--                     <td>&nbsp;&nbsp;</td>-->
+    <!--                     <td>&nbsp;Comprar Créditos SMS&nbsp;</td>-->
+    <!--                 </tr>-->
+    <!--           </table>-->
+    <!--       </div>-->
 
-<button id="btn_carga_sms" class="btn bg-gradient-primary" >
-  Comprar Créditos SMS
-</button>
-
+    <button id="btn_carga_sms" class="btn bg-gradient-primary" >
+      Comprar Créditos SMS
+    </button>
 
 </div>
 
-
-
-
 <input type="hidden" id="ids_registros" value="">
-
-
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -55,6 +48,8 @@
       </div>
       <div id="divContenCargDoc" class="modal-body"></div>
       <div class="modal-footer">
+      <div class="mercado-container"></div>
+
         <button id="btn_registrar_pago" type="button" class="btn btn-success ">REGISTRAR PAGO</button>
         <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>

@@ -59,6 +59,28 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+
+  <!-- SDK MercadoPago.js V2 -->
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+  <!--  botón de pago Mercado pago -->
+  
+  <script type="text/javascript">
+    const mp = new MercadoPago('TEST-5f5b814c-b298-4b11-b3c4-af46b5e0bc05', {
+        locale: 'es-MX'
+    });
+
+    mp.checkout({
+        preference: {
+        id: '<?php echo $preference->id ?>' // Indica el ID de la preferencia
+        },
+        render: {
+        container: '.mercado-container',
+        label: 'Pagar con mp',
+        }
+    });
+  </script>
+
 </body>
 
 </html>

@@ -40,8 +40,7 @@
     <script type="text/javascript" src="js/dropzone.js?v=1473248119"></script>
     <link type="text/css" href="css/dropzone.css?v=1473248119" rel="stylesheet" >
 
-    <script type="text/javascript" src="js/dropzone.js?v=1473248119"></script>
-    <link type="text/css" href="css/dropzone.css?v=1473248119" rel="stylesheet" >
+
 
     <style type="text/css">
              .contenedor{
@@ -587,12 +586,41 @@
 
     </script>
 
+
+
 <?php
+    // SDK de Mercado Pago
+    require __DIR__ .  '/../../vendor/autoload.php';
+    // Agrega credenciales
+    MercadoPago\SDK::setAccessToken('TEST-8810908882015722-101618-4cdf07bdd65a98f4be26b1ad6da9303d-236513607');
+
+    // Crea un objeto de preferencia
+    $preference = new MercadoPago\Preference();
+
+    // Crea un ítem en la preferencia
+    $item = new MercadoPago\Item();
+    $item->title = 'Licencias';
+    $item->quantity = 1;
+    $item->unit_price = 500;
+    $preference->items = array($item);
+
+        // Redireccion de pagos
+        $preference->back_urls = array(
+            "success"=>"http://app_mp_checkout.test/modulos/administrador/captura_mp.php",
+            "failure"=>"http://app_mp_checkout.test/modulos/administrador/fallo_mp.php",
+        );
+
+    $preference->auto_return = "approved";
+    $preference->binary_mode = true;
+    $preference->save();
+
    // MENSAJE DE VENCIMIENTO DE PAGO
    if($ban_adeuda_licencia){
       echo "<section id='msgLicencia'>".utf8_decode($_SESSION["msg_blk"])."</section>";
    }
 ?>
+
+
 
 </head>
 

@@ -361,6 +361,7 @@ switch ($_POST['index']) {
       break;
     case 2:  ##################### OBTIENE CONTROLADOR PARA CARGAR DOCUMENTO ########################
 
+    
                   $vec=explode("|", $_POST["ids"]);
                   $auxv="";
                   for ($i=0; $i < count($vec) ; $i++) {
@@ -390,6 +391,7 @@ switch ($_POST['index']) {
                                  </tr>';
 
                           $total_cuenta+=number_format($datos_text["importe_pago"],2,".","");
+                          
                       }
                   }
                   $coneccion->Close();

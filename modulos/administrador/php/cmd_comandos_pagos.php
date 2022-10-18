@@ -236,7 +236,7 @@ switch ($_POST['index']) {
                         $fechaP="";
 
                         $retu.='<a id="cuadro_'.$datos_text["id"].'" href="#" data-id_empresa_base="'.$datos_text["id_empresa_base"].'" data-id="'.$datos_text["id"].'" data-status="'.$datos_text["status"].'" class="contenedor">';
-//                        $retu.='<a class="col-lg-4 col-md-6 mb-4 mb-lg-0 card p-2"  id="cuadro_'.$datos_text["id"].'" href="#" data-id_empresa_base="'.$datos_text["id_empresa_base"].'" data-id="'.$datos_text["id"].'" data-status="'.$datos_text["status"].'">';
+            // $retu.='<a class="col-lg-4 col-md-6 mb-4 mb-lg-0 card p-2"  id="cuadro_'.$datos_text["id"].'" href="#" data-id_empresa_base="'.$datos_text["id_empresa_base"].'" data-id="'.$datos_text["id"].'" data-status="'.$datos_text["status"].'">';
 
 
                         //Inicio
@@ -363,6 +363,7 @@ switch ($_POST['index']) {
       break; 
     case 2:  ##################### OBTIENE CONTROLADOR PARA CARGAR DOCUMENTO ########################
 
+
                   $vec=explode("|", $_POST["ids"]);
                   $auxv="";
                   for ($i=0; $i < count($vec) ; $i++) { 
@@ -391,9 +392,11 @@ switch ($_POST['index']) {
                                     <td style="text-align:right; border-right: 1px solid #D8D8D8;">'.number_format($datos_text["importe_pago"],2,".",",").'</td>
                                  </tr>';
 
-                          $total_cuenta+=number_format($datos_text["importe_pago"],2,".","");        
+                          $total_cuenta+=number_format($datos_text["importe_pago"],2,".","");     
+                          
                       }
                   } 
+
                   $coneccion->Close();  
 
                   $head="<tr>
@@ -413,7 +416,7 @@ switch ($_POST['index']) {
 
                   echo "<input type='hidden' id='TotalImportComprobante' value='".number_format($total_cuenta,2,".","")."'>";      
 
-         break; 
+        break; 
     case 3:  ##################### HABILITA DE NUEVO TODOS LOS MENUS ########################
 
             unset($_SESSION["msg_blk"]);
