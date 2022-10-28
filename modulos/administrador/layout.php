@@ -635,14 +635,33 @@
 
     </div>
     <hr class="horizontal dark mt-0">
+
     <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a id="btn_cargar_comp" class="nav-link text-dark" >
+          <a  class="nav-link text-dark" >
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
               <i class="ni ni-shop text-primary text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1 ">Cargar comprobante</span>
+            <span class="nav-link-text ms-1 ">Menu 1</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a  class="nav-link text-dark" >
+            <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+              <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1 ">Menu 2</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a  class="nav-link text-dark" >
+            <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+              <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1 ">Menu 3</span>
           </a>
         </li>
 

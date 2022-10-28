@@ -21425,6 +21425,18 @@ fieldset:disabled .btn {
   cursor: pointer;
 }
 
+.fixed-plugin .fixed-plugin-button2 {
+  background: #fff;
+  border-radius: 50%;
+  bottom: 100px;
+  right: 30px;
+  font-size: 1.25rem;
+  z-index: 990;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+}
+
+
 .fixed-plugin .fixed-plugin-button i {
   pointer-events: none;
 }
