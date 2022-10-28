@@ -665,7 +665,7 @@
           </ol>
           <h6 class="font-weight-bolder mb-0 text-white">Default</h6>
         </nav>
-        <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+        <div class="sidenav-toggler sidenav-toggler-inner d-xl-block">
           <a href="javascript:;" class="nav-link p-0">
             <div class="sidenav-toggler-inner">
               <i class="sidenav-toggler-line bg-white"></i>
