@@ -22449,7 +22449,7 @@ hr.horizontal.gray-light {
   }
 
   .g-sidenav-show .navbar:not(.sidenav).navbar-main .navbar-collapse {
-    display: flex !important;
+   display: contents!important;
     flex-basis: auto;
   }
 
